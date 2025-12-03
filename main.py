@@ -12,6 +12,7 @@ def cesar_cipher(text, key, cipher=True):
 	return crypted_text
 
 
+
 def brute_force_cesar_cipher(crypted_text):
 	for potential_key in range(1, 1_114_112):
 		potential_initial_text = cesar_cipher(crypted_text, potential_key, cipher=False)
@@ -25,12 +26,30 @@ def brute_force_cesar_cipher(crypted_text):
 
 
 
+def vigenere_cipher(text, password):
+	list_of_keys = [ord(char) for char in password]
+	crypted_text = ""
 
-crypted_text = cesar_cipher(text="lapin", key=554)
-print(crypted_text)
+	for index, char in enumerate(text):
+		current_key = list_of_keys[index % len(list_of_keys)]
+		crypted_char = cesar_cipher(text=char, key=current_key)
+		crypted_text += crypted_char
+
+	return crypted_text
+
+
+
+
+
+# crypted_text = cesar_cipher(text="lapin", key=554)
+# print(crypted_text)
 
 # initial_text = cesar_cipher(text=crypted_text, key=3_000_000, cipher=False)
 # print(initial_text)
 
 
-brute_force_cesar_cipher(crypted_text)
+# brute_force_cesar_cipher(crypted_text)
+
+
+crypted_text = vigenere_cipher(text="Bonjour tout le monde !", password="Azerty12345!")
+print(crypted_text)
