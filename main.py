@@ -26,13 +26,13 @@ def brute_force_cesar_cipher(crypted_text):
 
 
 
-def vigenere_cipher(text, password):
+def vigenere_cipher(text, password, cipher=True):
 	list_of_keys = [ord(char) for char in password]
 	crypted_text = ""
 
 	for index, char in enumerate(text):
 		current_key = list_of_keys[index % len(list_of_keys)]
-		crypted_char = cesar_cipher(text=char, key=current_key)
+		crypted_char = cesar_cipher(text=char, key=current_key, cipher=cipher)
 		crypted_text += crypted_char
 
 	return crypted_text
@@ -51,5 +51,9 @@ def vigenere_cipher(text, password):
 # brute_force_cesar_cipher(crypted_text)
 
 
-crypted_text = vigenere_cipher(text="Bonjour tout le monde !", password="Azerty12345!")
+crypted_text = vigenere_cipher(text="Bonjour tout le monde !", password="Azerty12345")
 print(crypted_text)
+
+initial_text = vigenere_cipher(text=crypted_text, password="Azerty12345", cipher=False)
+print(initial_text)
+
