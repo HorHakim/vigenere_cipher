@@ -1,5 +1,7 @@
-def cesar_cipher(text, key):
+def cesar_cipher(text, key, cipher=True):
 
+	key = key if cipher else -key # ternary
+	
 	crypted_text = ""
 	for char in text:
 		crypted_char = chr((ord(char) + key) % 1_114_112)
@@ -8,8 +10,6 @@ def cesar_cipher(text, key):
 	return crypted_text
 
 
-def cesar_uncipher(text, key):
-	return cesar_cipher(text, -key)
 
 
 
@@ -17,5 +17,5 @@ def cesar_uncipher(text, key):
 crypted_text = cesar_cipher(text="lapin", key=3_000_000)
 print(crypted_text)
 
-initial_text = cesar_uncipher(text=crypted_text, key=3_000_000)
+initial_text = cesar_cipher(crypted_text, 3_000_000, False)
 print(initial_text)
